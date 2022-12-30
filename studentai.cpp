@@ -22,14 +22,14 @@ void microMouseServer::studentAI()
  * void printUI(const char *mesg);
 */
 
-    if (!isWallLeft()) {
-        turnLeft();
+    if (!isWallRight()) {
+        turnRight();
     }
     else {
-        if (!isWallRight()) {
-            turnRight();
+        if (isWallForward() && !isWallLeft()) {
+            turnLeft();
         }
-        else if (isWallForward()) {
+        else if (isWallForward() && isWallLeft() && isWallRight()) {
             turnLeft();
             turnLeft();
         }
