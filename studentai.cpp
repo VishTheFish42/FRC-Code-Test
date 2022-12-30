@@ -1,48 +1,6 @@
 
 #include "micromouseserver.h"
 
-bool inFinish() {
-    int count = 0;
-    if (isWallLeft() && !(isWallRight())) {
-        for (int i = 0; i < 4; i++) {
-            turnRight();
-
-            if (isWallForward()) {
-                return false;
-            }
-            else {
-                moveForward();
-                count++;
-            }
-        }
-
-        if (count != 4) {
-            return false;
-        }
-
-        return true;
-    }
-    else if(!isWallLeft() && isWallRight()) {
-        for (int i = 0; i < 4; i++) {
-            turnLeft();
-
-            if (isWallForward()) {
-                return false;
-            }
-            else {
-                moveForward();
-                count++;
-            }
-        }
-
-        if (count != 4) {
-            return false;
-        }
-
-        return true;
-    }
-}
-
 void microMouseServer::studentAI()
 {
 /*
@@ -63,7 +21,19 @@ void microMouseServer::studentAI()
  * void foundFinish();
  * void printUI(const char *mesg);
 */
-   while (!(inFinish())) {
 
-   }
+    if (!isWallLeft()) {
+        turnLeft();
+    }
+    else {
+        if (!isWallRight()) {
+            turnRight();
+        }
+        else if (isWallForward()) {
+            turnLeft();
+            turnLeft();
+        }
+    }
+
+    moveForward();
 }
